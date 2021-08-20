@@ -1,0 +1,90 @@
+{
+  "product": [
+    {
+      "id": 1,
+      "name": "Chort",
+      "cost": "50",
+      "department": 1,
+      "category": 3
+    },
+    {
+      "id": 2,
+      "name": "Pantalon de hombre",
+      "cost": "100",
+      "department": 1,
+      "category": 3
+    },
+    {
+      "id": 3,
+      "name": "Blusa azul",
+      "cost": "20",
+      "department": 1,
+      "category": 2
+    },
+    {
+      "id": 4,
+      "name": "Botas",
+      "cost": "120",
+      "department": 2,
+      "category": 4
+    },
+    {
+      "name": "Tacones",
+      "cost": "500",
+      "department": "2",
+      "category": "5",
+      "id": 5
+    },
+    {
+      "name": "Zapatillas",
+      "cost": "40",
+      "department": "2",
+      "category": "5",
+      "id": 6
+    },
+    {
+      "name": "sdfsdf",
+      "cost": "45",
+      "department": "1",
+      "category": "1",
+      "id": 7
+    }
+  ],
+  "department": [
+    {
+      "id": 1,
+      "name": "Ropa"
+    },
+    {
+      "id": 2,
+      "name": "Zapatos"
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "name": "Ropa de bebe",
+      "department": 1
+    },
+    {
+      "id": 2,
+      "name": "Ropa de mujer",
+      "department": 1
+    },
+    {
+      "id": 3,
+      "name": "Ropa de hombre",
+      "department": 1
+    },
+    {
+      "id": 4,
+      "name": "Zapato de hombre",
+      "department": 2
+    },
+    {
+      "id": 5,
+      "name": "Zapato de mujer",
+      "department": 2
+    }
+  ]
+}
