@@ -7,15 +7,14 @@ export const Loading = ({ size }) => {
     <div
       className="d-flex justify-content-center align-items-center"
       style={{
-        width: size === "sm" ? "100%" : "0%",
+        width: size === "sm" ? "10%" : "100%",
       }}
-      size={size}
     >
-      <Spinner animation="border" variant="primary" />
+      <Spinner size={size} animation="border" variant="primary" />
     </div>
   );
 };
 
 Loading.propTypes = {
-  size?: PropTypes.string,
+  size: PropTypes.string,
 };

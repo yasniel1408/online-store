@@ -1,36 +1,38 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
-import { addProduct } from "../../redux/actions/productActions";
+// import { DevTool } from "@hookform/devtools";
+import {
+  addProduct,
+  editProductById,
+} from "../../redux/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDepartment } from "../../redux/actions/departmentActions";
 import { getCategoryById } from "../../redux/actions/categoryActions";
 import { Loading } from "../Loading/Loading";
 
-export const DataForm = ({ show, handleClose }) => {
+export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
   const dispatch = useDispatch();
-
+  const { products } = useSelector((state) => state.productReducer);
   const { departments, errorDepartment, loadingDepartment } = useSelector(
     (state) => state.departmentReducer
   );
-
   const { categories, errorCategory, loadingCategory } = useSelector(
     (state) => state.categoryReducer
   );
 
-  const selectCategory = useRef();
-
   const {
     register,
-    control,
+    // control,
     formState: { errors },
     handleSubmit,
     getValues,
+    reset,
+    setValue,
   } = useForm({
     defaultValues: {
-      name: null,
+      name: "",
       cost: null,
       department: "",
       category: "",
@@ -38,25 +40,63 @@ export const DataForm = ({ show, handleClose }) => {
   });
 
   useEffect(() => {
-    const load = async () => {
-      dispatch(await getAllDepartment());
-    };
-    load();
-  }, []);
+    const loadForm = async () => {
+      dispatch(getAllDepartment());
+      if (editId) {
+        const p = await products.find(
+          (currentValue) => currentValue.id === editId
+        );
+        let dep = await departments.find(
+          (currentValue) => currentValue.name === p.department
+        );
+        setValue("name", p.name);
+        setValue("cost", p.cost);
+        setValue("department", dep.id);
 
-  const onSubmit = (data) => {
-    dispatch(addProduct(data));
+        dispatch(await getCategoryById(dep.id));
+
+        let categ = categories.find(
+          (currentValue) => currentValue.name === p.category
+        );
+        setValue("category", categ.id);
+      }
+    };
+    loadForm();
+  }, [editId, setEditId]);
+
+  const onSubmit = async (data) => {
+    data.department = departments.find(
+      (currentValue) => currentValue.id === parseInt(data.department)
+    ).name;
+    data.category = categories.find(
+      (currentValue) => currentValue.id === parseInt(data.category)
+    ).name;
+    if (editId) {
+      await dispatch(editProductById(editId, data));
+    } else {
+      await dispatch(addProduct(data));
+    }
+    load();
+    setEditId(null);
+    handleClose();
+    reset();
   };
 
-  const changeDepartment = async () => {
+  const changeDepartment = () => {
     dispatch(getCategoryById(getValues("department")));
+  };
+
+  const closeModal = () => {
+    setEditId(null);
+    handleClose();
+    reset();
   };
 
   return (
     <div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>New Product</Modal.Title>
+          <Modal.Title>Product</Modal.Title>
         </Modal.Header>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Body>
@@ -91,11 +131,11 @@ export const DataForm = ({ show, handleClose }) => {
               <Form.Select
                 {...register("department", { required: true })}
                 aria-label="Select the Department"
-                onBlur={changeDepartment()}
+                onBlur={() => changeDepartment()}
               >
                 <option value="">Select the Department</option>
                 {departments.map((d) => (
-                  <option key={d.id} value={d.id}>
+                  <option key={d.id} value={`${d.id}`}>
                     {d.name}
                   </option>
                 ))}
@@ -116,7 +156,7 @@ export const DataForm = ({ show, handleClose }) => {
               >
                 <option value="">Select the Category</option>
                 {categories.map((c) => (
-                  <option key={c.id} value={c.id}>
+                  <option key={c.id} value={`${c.id}`}>
                     {c.name}
                   </option>
                 ))}
@@ -129,14 +169,14 @@ export const DataForm = ({ show, handleClose }) => {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={handleClose}>
+            <Button variant="danger" onClick={() => closeModal()}>
               Close
             </Button>
             <Button variant="success" type="submit">
-              Submit
+              Save
             </Button>
           </Modal.Footer>
-          <DevTool control={control} />
+          {/* <DevTool control={control} /> */}
         </Form>
       </Modal>
     </div>
@@ -146,4 +186,7 @@ export const DataForm = ({ show, handleClose }) => {
 DataForm.propTypes = {
   show: PropTypes.bool,
   handleClose: PropTypes.func,
+  editId: PropTypes.number,
+  setEditId: PropTypes.func,
+  load: PropTypes.func,
 };

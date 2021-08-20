@@ -28,6 +28,19 @@ const productReducer = (state = initialState, action) => {
         loading: false,
       };
     }
+    case ActionTypes.PRODUCT_DELETE: {
+      return {
+        ...state,
+        products: state.products.filter((p) => p.id !== action.payload),
+        loading: false,
+      };
+    }
+    case ActionTypes.PRODUCT_STOP_FETCH: {
+      return {
+        ...state,
+        loading: false,
+      };
+    }
     default:
       return state;
   }

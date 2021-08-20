@@ -22,9 +22,7 @@ export const getCategoryById = (id) => {
       const response = await axios(`/category?department=${id}`);
       if (response.data) {
         dispatch(categorySuccess(response.data));
-        return true;
       }
-      return false;
     } catch (error) {
       dispatch(categoryError(error));
     }

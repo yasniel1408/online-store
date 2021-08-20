@@ -15,16 +15,29 @@ export const productError = (error) => ({
   payload: error,
 });
 
-export const getAllProducts = () => {
+export const productDelete = (id) => ({
+  type: ActionTypes.PRODUCT_DELETE,
+  payload: id,
+});
+
+export const productAdd = (data) => ({
+  type: ActionTypes.PRODUCT_ADD,
+  payload: data,
+});
+
+export const productStopFetch = () => ({
+  type: ActionTypes.PRODUCT_STOP_FETCH,
+});
+
+export const getAllProducts = (page) => {
   return async (dispatch) => {
     dispatch(productFetch());
     try {
-      const response = await axios("/product");
+      const response = await axios(`/product?_page=${page}&_limit=5`);
       if (response.data) {
         dispatch(productSuccess(response.data));
-        return true;
+        return response.headers["x-total-count"];
       }
-      return false;
     } catch (error) {
       dispatch(productError(error));
     }
@@ -36,9 +49,38 @@ export const addProduct = (data) => {
     dispatch(productFetch());
     try {
       const response = await axios.post("/product", data);
-      console.log(response);
-      if (response.data) {
-        dispatch(productSuccess(response.data));
+      if (response.status === 201) {
+        dispatch(productStopFetch());
+      }
+    } catch (error) {
+      dispatch(productError(error));
+    }
+  };
+};
+
+export const deleteProductById = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(productFetch());
+      const response = await axios.delete(`/product/${id}`);
+      if (response.status === 200) {
+        dispatch(productDelete(id));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      dispatch(productError(error));
+    }
+  };
+};
+
+export const editProductById = (id, data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(productFetch());
+      const response = await axios.put(`/product/${id}`, data);
+      if (response.status === 200) {
+        dispatch(productStopFetch());
         return true;
       }
       return false;

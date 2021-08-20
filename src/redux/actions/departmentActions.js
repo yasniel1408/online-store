@@ -22,9 +22,7 @@ export const getAllDepartment = () => {
       const response = await axios("/department");
       if (response.data) {
         dispatch(departmentSuccess(response.data));
-        return true;
       }
-      return false;
     } catch (error) {
       dispatch(departmentError(error));
     }

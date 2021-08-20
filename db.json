@@ -1,53 +1,46 @@
 {
   "product": [
     {
-      "id": 1,
-      "name": "Chort",
-      "cost": "50",
-      "department": 1,
-      "category": 3
+      "name": "Bluza",
+      "cost": "54",
+      "department": "Ropa",
+      "category": "Ropa de mujer",
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Pantalon de hombre",
-      "cost": "100",
-      "department": 1,
-      "category": 3
+      "name": "pulover",
+      "cost": "44",
+      "department": "Ropa",
+      "category": "Ropa de hombre",
+      "id": 2
     },
     {
-      "id": 3,
-      "name": "Blusa azul",
-      "cost": "20",
-      "department": 1,
-      "category": 2
-    },
-    {
-      "id": 4,
       "name": "Botas",
-      "cost": "120",
-      "department": 2,
-      "category": 4
+      "cost": "90",
+      "department": "Zapatos",
+      "category": "Zapato de hombre",
+      "id": 3
     },
     {
-      "name": "Tacones",
-      "cost": "500",
-      "department": "2",
-      "category": "5",
-      "id": 5
-    },
-    {
-      "name": "Zapatillas",
-      "cost": "40",
-      "department": "2",
-      "category": "5",
+      "name": "sdf",
+      "cost": "3",
+      "department": "Ropa",
+      "category": "Ropa de bebe",
       "id": 6
     },
     {
-      "name": "sdfsdf",
-      "cost": "45",
-      "department": "1",
-      "category": "1",
-      "id": 7
+      "name": "asda",
+      "cost": "34",
+      "department": "Ropa",
+      "category": "Ropa de mujer",
+      "id": 8
+    },
+    {
+      "name": "awdaw",
+      "cost": "34",
+      "department": "Zapatos",
+      "category": "Zapato de hombre",
+      "id": 9
     }
   ],
   "department": [
