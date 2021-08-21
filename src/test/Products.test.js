@@ -6,34 +6,34 @@ import { setupServer } from "msw/node";
 import productReducer from "../redux/reducers/productReducer";
 import { Products } from "../page/Products/Products";
 
-function render(
-  ui,
-  {
-    preloadedState,
-    store = configureStore({
-      reducer: { user: productReducer },
-      preloadedState,
-    }),
-    ...renderOptions
-  } = {}
-) {
-  function Wrapper({ children }) {
-    return <Provider store={store}>{children}</Provider>;
-  }
-  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
-}
+// function render(
+//   ui,
+//   {
+//     preloadedState,
+//     store = configureStore({
+//       reducer: { user: productReducer },
+//       preloadedState,
+//     }),
+//     ...renderOptions
+//   } = {}
+// ) {
+//   function Wrapper({ children }) {
+//     return <Provider store={store}>{children}</Provider>;
+//   }
+//   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
+// }
 
-export const handlers = [
-  rest.get("/api/user", (req, res, ctx) => {
-    return res(ctx.json("John Smith"), ctx.delay(150));
-  }),
-];
+// export const handlers = [
+//   rest.get("/api/user", (req, res, ctx) => {
+//     return res(ctx.json("John Smith"), ctx.delay(150));
+//   }),
+// ];
 
-const server = setupServer(...handlers);
+// const server = setupServer(...handlers);
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+// beforeAll(() => server.listen());
+// afterEach(() => server.resetHandlers());
+// afterAll(() => server.close());
 
 describe("Products", () => {
   it("should return the initial state", () => {

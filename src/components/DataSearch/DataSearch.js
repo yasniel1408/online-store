@@ -3,18 +3,18 @@ import PropTypes from "prop-types";
 import { SearchIcon } from "@primer/octicons-react";
 import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 
-export const DataSearch = ({ load }) => {
+export const DataSearch = ({ load, setPage }) => {
   const [q, setQ] = useState("");
 
   const serach = (e) => {
     setQ(e.target.value);
+    setPage(1);
     load(q);
   };
 
   const submitSerach = (e) => {
     e.preventDefault();
-    setQ(e.target.value);
-    load(q);
+    serach(e);
   };
   return (
     <Form onSubmit={submitSerach} className="mt-3 mr-3">
@@ -30,4 +30,5 @@ export const DataSearch = ({ load }) => {
 
 DataSearch.propTypes = {
   load: PropTypes.func,
+  setPage: PropTypes.func,
 };

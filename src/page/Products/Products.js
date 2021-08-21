@@ -46,7 +46,7 @@ export const Products = () => {
           Add Product
         </Button>
         <div className="d-flex flex-row">
-          <DataSearch load={load} />
+          <DataSearch load={load} setPage={setPage} />
         </div>
       </div>
 
