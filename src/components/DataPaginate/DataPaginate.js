@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Pagination } from "react-bootstrap";
 
-export const DataPaginate = ({ total, setPage, page }) => {
+export const DataPaginate = ({ total, setPage, page, limit }) => {
   let pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(total / 5); i++) {
+  for (let i = 1; i <= Math.ceil(total / limit); i++) {
     pageNumbers.push(i);
   }
 
@@ -26,7 +26,7 @@ export const DataPaginate = ({ total, setPage, page }) => {
         <Pagination.Item
           key={0}
           active={0 === page}
-          onClick={() => paginate(page - 1)}
+          onClick={() => paginate(page > 1 ? page - 1 : 1)}
         >
           {"<"}
         </Pagination.Item>
@@ -42,14 +42,20 @@ export const DataPaginate = ({ total, setPage, page }) => {
         <Pagination.Item
           key={0}
           active={0 === page}
-          onClick={() => paginate(page + 1)}
+          onClick={() =>
+            paginate(
+              page < Math.ceil(total / limit)
+                ? page + 1
+                : Math.ceil(total / limit)
+            )
+          }
         >
           {">"}
         </Pagination.Item>
         <Pagination.Item
           key={0}
           active={0 === page}
-          onClick={() => paginate(Math.ceil(total / 5))}
+          onClick={() => paginate(Math.ceil(total / limit))}
         >
           {">>"}
         </Pagination.Item>
@@ -62,4 +68,5 @@ DataPaginate.propTypes = {
   total: PropTypes.number,
   setPage: PropTypes.func,
   page: PropTypes.number,
+  limit: PropTypes.number,
 };

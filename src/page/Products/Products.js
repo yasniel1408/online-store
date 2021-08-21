@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Form, Table } from "react-bootstrap";
 import { PlusIcon } from "@primer/octicons-react";
 import { getAllProducts } from "../../redux/actions/productActions";
 import { AlertMessage } from "../../components/AlertMessage/AlertMessage";
@@ -14,16 +14,22 @@ export const Products = () => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [total, setTotal] = useState(0);
+  const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
   const [editId, setEditId] = useState(null);
   const { error, loading } = useSelector((state) => state.productReducer);
 
   useEffect(() => {
     load();
-  }, [page]);
+  }, [page, setLimit, limit]);
 
   const load = async (q = "") => {
-    setTotal(parseInt(await dispatch(getAllProducts({ page, q }))));
+    setTotal(parseInt(await dispatch(getAllProducts({ page, q, limit }))));
+  };
+
+  const setLimitTable = (value) => {
+    setPage(1);
+    setLimit(value);
   };
 
   return (
@@ -71,7 +77,22 @@ export const Products = () => {
           </tbody>
         </Table>
       )}
-      <DataPaginate total={total} setPage={setPage} page={page} />
+      <div className="w-100 d-flex justify-content-between">
+        <Form.Group className="">
+          <Form.Select onChange={(e) => setLimitTable(e.target.value)}>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </Form.Select>
+        </Form.Group>
+        <DataPaginate
+          total={total}
+          setPage={setPage}
+          page={page}
+          limit={limit}
+        />
+      </div>
     </Container>
   );
 };
