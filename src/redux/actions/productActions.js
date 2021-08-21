@@ -20,11 +20,6 @@ export const productDelete = (id) => ({
   payload: id,
 });
 
-export const productAdd = (data) => ({
-  type: ActionTypes.PRODUCT_ADD,
-  payload: data,
-});
-
 export const productStopFetch = () => ({
   type: ActionTypes.PRODUCT_STOP_FETCH,
 });

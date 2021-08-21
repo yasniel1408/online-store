@@ -39,7 +39,7 @@ export const Products = () => {
         <Button
           variant="success"
           className="mt-3"
-          data-testid="btn-add"
+          id="btn-add"
           onClick={() => setShow(true)}
         >
           <PlusIcon />
