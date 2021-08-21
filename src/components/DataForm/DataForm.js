@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 import {
   addProduct,
   editProductById,
@@ -24,7 +24,7 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
 
   const {
     register,
-    control,
+    // control,
     formState: { errors },
     handleSubmit,
     getValues,
@@ -181,7 +181,7 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
               )}
             </Button>
           </Modal.Footer>
-          <DevTool control={control} />
+          {/* <DevTool control={control} /> */}
         </Form>
       </Modal>
     </div>

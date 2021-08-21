@@ -48,6 +48,7 @@ export const addProduct = (data) => {
       const response = await axios.post("/product", data);
       if (response.status === 201) {
         dispatch(productStopFetch());
+        return true;
       }
     } catch (error) {
       dispatch(productError(error));
