@@ -14,7 +14,7 @@ import { Loading } from "../Loading/Loading";
 
 export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.productReducer);
+  const { products, loading } = useSelector((state) => state.productReducer);
   const { departments, errorDepartment, loadingDepartment } = useSelector(
     (state) => state.departmentReducer
   );
@@ -40,36 +40,25 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
   });
 
   useEffect(() => {
-    const loadForm = async () => {
-      dispatch(getAllDepartment());
-      if (editId) {
-        const p = await products.find(
-          (currentValue) => currentValue.id === editId
-        );
-        let dep = await departments.find(
-          (currentValue) => currentValue.name === p.department
-        );
-        setValue("name", p.name);
-        setValue("cost", p.cost);
-        setValue("department", dep.id);
-
-        dispatch(await getCategoryById(dep.id));
-
-        let categ = categories.find(
-          (currentValue) => currentValue.name === p.category
-        );
-        setValue("category", categ.id);
-      }
-    };
-    loadForm();
+    dispatch(getAllDepartment());
+    if (editId) {
+      let product = products.find((p) => p.id === editId);
+      setValue("name", product.name);
+      setValue("cost", product.cost);
+      const deptm = departments.find((d) => d.name === product.department);
+      setValue("department", deptm.id);
+      dispatch(getCategoryById(deptm.id));
+      const categ = categories.find((c) => c.name === product.category);
+      setValue("category", categ?.id);
+    }
   }, [editId, setEditId]);
 
   const onSubmit = async (data) => {
     data.department = departments.find(
-      (currentValue) => currentValue.id === parseInt(data.department)
+      (d) => d.id === parseInt(data.department)
     ).name;
     data.category = categories.find(
-      (currentValue) => currentValue.id === parseInt(data.category)
+      (c) => c.id === parseInt(data.category)
     ).name;
     if (editId) {
       await dispatch(editProductById(editId, data));
@@ -98,7 +87,7 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
         <Modal.Header closeButton>
           <Modal.Title>Product</Modal.Title>
         </Modal.Header>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)} className="form-header">
           <Modal.Body>
             <Form.Group className="mb-3" controlId="name">
               <Form.Label>Name</Form.Label>
@@ -106,6 +95,7 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
                 {...register("name", { required: true, maxLength: 15 })}
                 type="text"
                 placeholder="Enter the product name"
+                className="form-input__name"
               />
               <Form.Text className="text-danger">
                 {errors.name?.type === "required" && "Name is required"}
@@ -120,6 +110,7 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
                 type="number"
                 {...register("cost", { required: true })}
                 placeholder="Enter the product cost"
+                className="form-input__cost"
               />
               <Form.Text className="text-danger">
                 {errors.cost?.type === "required" && "Name is required"}
@@ -132,6 +123,7 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
                 {...register("department", { required: true })}
                 aria-label="Select the Department"
                 onBlur={() => changeDepartment()}
+                className="form-input__department"
               >
                 <option value="">Select the Department</option>
                 {departments.map((d) => (
@@ -153,6 +145,7 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
               <Form.Select
                 {...register("category", { required: true })}
                 aria-label="Select the Category"
+                className="form-input__category"
               >
                 <option value="">Select the Category</option>
                 {categories.map((c) => (
@@ -172,8 +165,18 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
             <Button variant="danger" onClick={() => closeModal()}>
               Close
             </Button>
-            <Button variant="success" type="submit">
-              Save
+            <Button
+              variant="success"
+              type="submit"
+              className="form-submit-button"
+            >
+              {loading ? (
+                <div className="d-flex flex-row">
+                  <Loading size="sm" /> Loading...
+                </div>
+              ) : (
+                "Save"
+              )}
             </Button>
           </Modal.Footer>
           {/* <DevTool control={control} /> */}

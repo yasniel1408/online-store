@@ -29,11 +29,11 @@ export const productStopFetch = () => ({
   type: ActionTypes.PRODUCT_STOP_FETCH,
 });
 
-export const getAllProducts = (page) => {
+export const getAllProducts = ({ page, q }) => {
   return async (dispatch) => {
     dispatch(productFetch());
     try {
-      const response = await axios(`/product?_page=${page}&_limit=5`);
+      const response = await axios(`/product?_page=${page}&_limit=5&q=${q}`);
       if (response.data) {
         dispatch(productSuccess(response.data));
         return response.headers["x-total-count"];

@@ -11,6 +11,7 @@ import { Loading } from "../Loading/Loading";
 import { DataPaginate } from "../DataPaginate/DataPaginate";
 import Swal from "sweetalert2";
 import { DataForm } from "../DataForm/DataForm";
+import { DataSearch } from "../DataSearch/DataSearch";
 
 export const Products = () => {
   const dispatch = useDispatch();
@@ -26,8 +27,8 @@ export const Products = () => {
     load();
   }, [page]);
 
-  const load = async () => {
-    setTotal(parseInt(await dispatch(getAllProducts(page))));
+  const load = async (q="") => {
+    setTotal(parseInt(await dispatch(getAllProducts({ page, q }))));
   };
 
   const editProduct = async (id) => {
@@ -69,15 +70,19 @@ export const Products = () => {
         setEditId={setEditId}
         load={load}
       />
-      <div className="w-100 d-flex ">
+      <div className="w-100 d-flex justify-content-between">
         <Button
           variant="success"
           className="mt-3"
+          data-testid="btn-add"
           onClick={() => setShow(true)}
         >
           <PlusIcon />
           Add Product
         </Button>
+        <div className="d-flex flex-row">
+          <DataSearch load={load} />
+        </div>
       </div>
 
       {error && <AlertMessage variant={"danger"} message={error.message} />}

@@ -16,6 +16,20 @@ export const DataPaginate = ({ total, setPage, page }) => {
   return (
     <div className="w-100 d-flex justify-content-end">
       <Pagination size="md">
+        <Pagination.Item
+          key={0}
+          active={0 === page}
+          onClick={() => paginate(1)}
+        >
+          {"<<"}
+        </Pagination.Item>
+        <Pagination.Item
+          key={0}
+          active={0 === page}
+          onClick={() => paginate(page - 1)}
+        >
+          {"<"}
+        </Pagination.Item>
         {pageNumbers.map((i) => (
           <Pagination.Item
             key={i}
@@ -25,6 +39,20 @@ export const DataPaginate = ({ total, setPage, page }) => {
             {i}
           </Pagination.Item>
         ))}
+        <Pagination.Item
+          key={0}
+          active={0 === page}
+          onClick={() => paginate(page + 1)}
+        >
+          {">"}
+        </Pagination.Item>
+        <Pagination.Item
+          key={0}
+          active={0 === page}
+          onClick={() => paginate(Math.ceil(total / 5))}
+        >
+          {">>"}
+        </Pagination.Item>
       </Pagination>
     </div>
   );

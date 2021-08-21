@@ -1,11 +1,12 @@
 import React from "react";
 import { Container, Navbar } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 export const Nav = () => {
   return (
     <Navbar bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand href="#home">
+      <Container className="d-flex align-content-end">
+        <Navbar.Brand href="/">
           <img
             alt="logo"
             src="/favicon.ico"
@@ -15,6 +16,15 @@ export const Nav = () => {
           />
           React Bootstrap
         </Navbar.Brand>
+        <Navbar.Collapse className="justify-content-end">
+          <NavLink
+            to="/"
+            className="menuNavBar"
+            activeClassName="activeMenuNavBar"
+          >
+            Products
+          </NavLink>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

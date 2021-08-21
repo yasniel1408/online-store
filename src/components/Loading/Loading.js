@@ -7,7 +7,7 @@ export const Loading = ({ size }) => {
     <div
       className="d-flex justify-content-center align-items-center"
       style={{
-        width: size === "sm" ? "10%" : "100%",
+        width: size === "sm" ? "auto" : "100%",
       }}
     >
       <Spinner size={size} animation="border" variant="primary" />

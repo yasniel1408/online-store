@@ -2,7 +2,7 @@
   "product": [
     {
       "name": "Bluza",
-      "cost": "54",
+      "cost": "454",
       "department": "Ropa",
       "category": "Ropa de mujer",
       "id": 1
@@ -36,11 +36,46 @@
       "id": 8
     },
     {
-      "name": "awdaw",
+      "name": "Tenis",
       "cost": "34",
       "department": "Zapatos",
       "category": "Zapato de hombre",
       "id": 9
+    },
+    {
+      "name": "Vestido",
+      "cost": "32",
+      "department": "Ropa",
+      "category": "Ropa de mujer",
+      "id": 10
+    },
+    {
+      "name": "Medias",
+      "cost": "34",
+      "department": "Ropa",
+      "category": "Ropa de bebe",
+      "id": 11
+    },
+    {
+      "name": "Chort",
+      "cost": "43",
+      "department": "Ropa",
+      "category": "Ropa de mujer",
+      "id": 12
+    },
+    {
+      "name": "Tacones",
+      "cost": "67",
+      "department": "Zapatos",
+      "category": "Zapato de mujer",
+      "id": 13
+    },
+    {
+      "name": "Chus",
+      "cost": "565",
+      "department": "Zapatos",
+      "category": "Zapato de hombre",
+      "id": 14
     }
   ],
   "department": [
