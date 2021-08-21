@@ -1,5 +1,5 @@
-import productReducer from "../redux/reducers/productReducer";
-import { ActionTypes } from "../redux/actions";
+import productReducer from "../reducers/productReducer";
+import { ActionTypes } from ".";
 
 describe("Products", () => {
   it("should return the initial state", () => {
