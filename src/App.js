@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Products } from "./components/Products/Products";
+import { Products } from "./page/Products/Products";
 import { Nav } from "./components/Nav/Nav";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Error404 } from "./components/Error404/Error404";
