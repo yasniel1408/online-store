@@ -24,11 +24,11 @@ export const productStopFetch = () => ({
   type: ActionTypes.PRODUCT_STOP_FETCH,
 });
 
-export const getAllProducts = ({ page, q, limit = 5 }) => {
+export const getAllProducts = ({ page = 1, q, limit = 5 }) => {
   return async (dispatch) => {
     dispatch(productFetch());
     try {
-      const response = await axios(
+      const response = await axios.get(
         `/product?_page=${page}&_limit=${limit}&q=${q}`
       );
       if (response.data) {
@@ -50,6 +50,7 @@ export const addProduct = (data) => {
         dispatch(productStopFetch());
         return true;
       }
+      return false;
     } catch (error) {
       dispatch(productError(error));
     }
