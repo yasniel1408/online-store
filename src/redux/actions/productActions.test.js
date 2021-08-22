@@ -49,8 +49,6 @@ describe("productActions", () => {
 
     let count = await store.dispatch(getAllProducts({}));
 
-    console.log(store.getState );
-
     expect(store.getActions()).toEqual(expectedActions);
     expect(axios.get).toHaveBeenCalledTimes(1);
     expect(count).toBe(data.length);
