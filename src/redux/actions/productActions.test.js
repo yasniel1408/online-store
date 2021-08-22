@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import configureMockStore from "redux-mock-store";
 import { ActionTypes } from ".";
 import {
