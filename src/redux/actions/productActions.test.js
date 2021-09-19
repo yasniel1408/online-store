@@ -9,27 +9,10 @@ import {
 } from "./productActions";
 import thunk from "redux-thunk";
 import axios from "axios";
+import data from "./__mocks__/products";
 
 jest.mock("../store.js");
 jest.mock("axios");
-
-const data = [
-  {
-    id: 1,
-    name: "Bluza",
-    cost: "44",
-    department: "Ropa",
-    category: "Ropa de mujer",
-  },
-  {
-    id: 2,
-    name: "Chort",
-    cost: "34",
-    department: "Ropa",
-    category: "Ropa de hombre",
-  },
-];
-
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore();
