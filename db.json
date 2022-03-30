@@ -15,15 +15,8 @@
       "id": 2
     },
     {
-      "name": "Botas",
-      "cost": "90",
-      "department": "Zapatos",
-      "category": "Zapato de hombre",
-      "id": 3
-    },
-    {
       "name": "Calsones",
-      "cost": "3",
+      "cost": "31",
       "department": "Ropa",
       "category": "Ropa de bebe",
       "id": 6
@@ -83,6 +76,20 @@
       "department": "Ropa",
       "category": "Ropa de bebe",
       "id": 15
+    },
+    {
+      "name": "Pulover",
+      "cost": "56",
+      "department": "Ropa",
+      "category": "Ropa de hombre",
+      "id": 16
+    },
+    {
+      "name": "Tenis",
+      "cost": "78",
+      "department": "Zapatos",
+      "category": "Zapato de hombre",
+      "id": 17
     }
   ],
   "department": [

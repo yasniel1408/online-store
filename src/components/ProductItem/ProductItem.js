@@ -42,7 +42,7 @@ export const ProductItem = ({ setEditId, load, setShow }) => {
 
   return (
     <>
-      {products.map((p) => (
+      {products?.map((p) => (
         <tr key={p.id}>
           <td>{p.id}</td>
           <td>{p.name}</td>

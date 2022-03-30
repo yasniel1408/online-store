@@ -128,7 +128,7 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
                 className="form-input__department"
               >
                 <option value="">Select the Department</option>
-                {departments.map((d) => (
+                {departments?.map((d) => (
                   <option key={d.id} value={`${d.name}`}>
                     {d.name}
                   </option>
@@ -150,7 +150,7 @@ export const DataForm = ({ show, handleClose, editId, setEditId, load }) => {
                 className="form-input__category"
               >
                 <option value="">Select the Category</option>
-                {categories.map((c) => (
+                {categories?.map((c) => (
                   <option key={c.id} value={`${c.name}`}>
                     {c.name}
                   </option>

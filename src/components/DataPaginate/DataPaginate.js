@@ -30,7 +30,7 @@ export const DataPaginate = ({ total, setPage, page, limit }) => {
         >
           {"<"}
         </Pagination.Item>
-        {pageNumbers.map((i) => (
+        {pageNumbers?.map((i) => (
           <Pagination.Item
             key={i}
             active={i === page}
