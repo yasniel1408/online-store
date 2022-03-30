@@ -30,11 +30,10 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "predeploy": "npm run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -68,5 +67,5 @@
     "react-proptypes-generate": "^1.7.5",
     "redux-mock-store": "^1.5.4"
   },
-  "proxy": "localhost:5000"
+  "proxy": "http://localhost:5000"
 }
