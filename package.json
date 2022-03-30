@@ -1,6 +1,7 @@
 {
   "name": "online-store",
   "version": "0.1.0",
+  "homepage": "https://<github-username>.github.io/<repo-name>",
   "private": true,
   "dependencies": {
     "@primer/octicons-react": "^15.0.1",
@@ -36,7 +37,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
-    "server" "npx json-server --watch public/db.json --port=5000"
+    "server": "npx json-server --watch db.json --port=5000"
   },
   "eslintConfig": {
     "extends": [
